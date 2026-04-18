@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <h2 class="fw-bold mb-4">📝 Post a New Job</h2>
+
+        <div class="job-card p-4">
+            <form method="POST" action="/post">
+
+                <!-- Job Title -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Job Title *</label>
+                    <input type="text" name="title" class="form-control"
+                           placeholder="e.g. Python Developer" required>
+                </div>
+
+                <!-- Company -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Company Name *</label>
+                    <input type="text" name="company" class="form-control"
+                           placeholder="e.g. Saudi Aramco" required>
+                </div>
+
+                <!-- Location & Job Type -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Location *</label>
+                        <select name="location" class="form-select" required>
+                            <option value="">Select City</option>
+                            <option>Riyadh</option>
+                            <option>Jeddah</option>
+                            <option>Dammam</option>
+                            <option>Mecca</option>
+                            <option>Medina</option>
+                            <option>Dhahran</option>
+                            <option>Khobar</option>
+                            <option>Remote</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Job Type *</label>
+                        <select name="job_type" class="form-select" required>
+                            <option value="">Select Type</option>
+                            <option>Full Time</option>
+                            <option>Part Time</option>
+                            <option>Contract</option>
+                            <option>Freelance</option>
+                            <option>Internship</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Category & Salary -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Category *</label>
+                        <select name="category" class="form-select" required>
+                            <option value="">Select Category</option>
+                            <option>Technology</option>
+                            <option>Data Science</option>
+                            <option>Design</option>
+                            <option>Marketing</option>
+                            <option>Finance</option>
+                            <option>Healthcare</option>
+                            <option>Engineering</option>
+                            <option>Education</option>
+                            <option>Sales</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Salary (optional)</label>
+                        <input type="text" name="salary" class="form-control"
+                               placeholder="e.g. 15,000 SAR">
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Job Description *</label>
+                    <textarea name="description" class="form-control" rows="5"
+                              placeholder="Describe the role, requirements and responsibilities..."
+                              required></textarea>
+                </div>
+
+                <!-- Contact Email -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Contact Email *</label>
+                    <input type="email" name="email" class="form-control"
+                           placeholder="hr@company.com" required>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary fw-bold px-4">
+                        Post Job
+                    </button>
+                    <a href="/" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

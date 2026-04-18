@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <!-- Back Button -->
+        <a href="/" class="btn btn-outline-primary mb-3">← Back to Jobs</a>
+
+        <!-- Job Header -->
+        <div class="job-card p-4 mb-3">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h2 class="fw-bold">{{ job.title }}</h2>
+                    <p class="text-muted mb-1">🏢 {{ job.company }}</p>
+                    <p class="text-muted mb-1">📍 {{ job.location }}</p>
+                    <p class="text-muted mb-1">📅 Posted: {{ job.date_posted.strftime('%d %B %Y') }}</p>
+                </div>
+                <span class="badge bg-success fs-6">{{ job.job_type }}</span>
+            </div>
+
+            <hr>
+
+            <!-- Job Details -->
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <small class="text-muted">Category</small>
+                    <p class="fw-bold">{{ job.category }}</p>
+                </div>
+                <div class="col-md-4">
+                    <small class="text-muted">Job Type</small>
+                    <p class="fw-bold">{{ job.job_type }}</p>
+                </div>
+                <div class="col-md-4">
+                    <small class="text-muted">Salary</small>
+                    <p class="fw-bold text-success">
+                        {% if job.salary %}
+                            {{ job.salary }}
+                        {% else %}
+                            Not specified
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Description -->
+            <h5 class="fw-bold">Job Description</h5>
+            <p class="text-muted">{{ job.description }}</p>
+
+            <hr>
+
+            <!-- Apply Section -->
+            <h5 class="fw-bold">How to Apply</h5>
+            <p>Send your CV to:
+                <a href="mailto:{{ job.email }}" class="text-primary fw-bold">
+                    {{ job.email }}
+                </a>
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-2 mt-3">
+                <a href="mailto:{{ job.email }}"
+                   class="btn btn-primary">Apply Now</a>
+                <a href="/delete/{{ job.id }}"
+                   class="btn btn-outline-danger"
+                   onclick="return confirm('Delete this job?')">Delete Job</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero-section text-white text-center py-5 mb-4">
+    <h1 class="fw-bold">Find Your Dream Job in Saudi Arabia</h1>
+    <p class="lead">Thousands of opportunities across the Kingdom</p>
+    <form method="GET" action="/" class="d-flex justify-content-center gap-2 mt-3">
+        <input type="text" name="search" value="{{ search }}"
+               class="form-control w-50" placeholder="Search jobs...">
+        <select name="category" class="form-select w-25">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+                <option value="{{ cat[0] }}"
+                    {% if selected_category == cat[0] %}selected{% endif %}>
+                    {{ cat[0] }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-warning fw-bold">Search</button>
+    </form>
+</div>
+
+<div class="row text-center mb-4">
+    <div class="col-md-3">
+        <div class="stat-card p-3">
+            <h3 class="text-primary fw-bold">{{ jobs|length }}+</h3>
+            <p class="text-muted mb-0">Job Openings</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card p-3">
+            <h3 class="text-primary fw-bold">50+</h3>
+            <p class="text-muted mb-0">Companies</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card p-3">
+            <h3 class="text-primary fw-bold">5+</h3>
+            <p class="text-muted mb-0">Categories</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card p-3">
+            <h3 class="text-primary fw-bold">100%</h3>
+            <p class="text-muted mb-0">Free to Use</p>
+        </div>
+    </div>
+</div>
+
+<h4 class="mb-3 fw-bold">
+    {% if search %}
+        Results for "{{ search }}"
+    {% else %}
+        Latest Jobs
+    {% endif %}
+    <span class="badge bg-primary ms-2">{{ jobs|length }}</span>
+</h4>
+
+{% if jobs %}
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-6 mb-3">
+            <div class="job-card p-3">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="fw-bold mb-1">{{ job.title }}</h5>
+                        <p class="text-muted mb-1">🏢 {{ job.company }}</p>
+                        <p class="text-muted mb-1">📍 {{ job.location }}</p>
+                    </div>
+                    <span class="badge bg-success">{{ job.job_type }}</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <div>
+                        <span class="badge bg-light text-dark me-1">{{ job.category }}</span>
+                        {% if job.salary %}
+                            <span class="text-success fw-bold">💰 {{ job.salary }}</span>
+                        {% endif %}
+                    </div>
+                    <a href="/job/{{ job.id }}" class="btn btn-primary btn-sm">View Job</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="text-center py-5">
+        <h5 class="text-muted">No jobs found. Try a different search!</h5>
+        <a href="/" class="btn btn-primary mt-2">Clear Search</a>
+    </div>
+{% endif %}
+
+{% endblock %}
